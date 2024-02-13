@@ -1,5 +1,7 @@
 package com.jsonShift;
 
+import java.io.IOException;
+
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
@@ -15,6 +17,13 @@ public class shifter extends AbstractVerticle {
     router.route().handler(BodyHandler.create());
     router.route("/").handler(this::handleRoot);
     router.route("/jsontojava").handler(jsonToJava::shift);
+    router.route("/csvtojava").handler(event -> {
+      try {
+        csvToJava.shift(event);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
 
     vertx.createHttpServer().requestHandler(router).listen(8888, http -> {
       if (http.succeeded()) {
