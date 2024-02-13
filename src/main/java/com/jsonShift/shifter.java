@@ -8,8 +8,18 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 
+/**
+ * This class represents a shifter that extends AbstractVerticle.
+ * It provides functionality to handle HTTP requests and perform data shifting operations.
+ */
 public class shifter extends AbstractVerticle {
 
+  /**
+   * Starts the shifter verticle and sets up the HTTP server.
+   *
+   * @param startPromise a Promise that indicates the completion or failure of the start operation
+   * @throws Exception if an error occurs during the start operation
+   */
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
     Router router = Router.router(vertx);
@@ -35,6 +45,11 @@ public class shifter extends AbstractVerticle {
     });
   }
 
+  /**
+   * Handles the root request and sends a plain text response.
+   *
+   * @param routingContext the routing context for the request
+   */
   private void handleRoot(RoutingContext routingContext) {
     routingContext.response()
         .putHeader("content-type", "text/plain")
