@@ -34,6 +34,8 @@ public class shifter extends AbstractVerticle {
         e.printStackTrace();
       }
     });
+    //TODO Define the route
+    //return this.getSerializer().toXml(new csvToJava().read(stream));
 
     vertx.createHttpServer().requestHandler(router).listen(8888, http -> {
       if (http.succeeded()) {
